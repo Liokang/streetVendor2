@@ -1,0 +1,16 @@
+.navbarColor{
+  background-color: black;
+}
+.mapBoxMap{
+  height: 100vh;
+  width: 100vw;
+}
+.loginPageFontColor{
+
+  color: white;
+  padding: 10px;
+}
+.link{
+  text-decoration: none;
+    color: black;
+}

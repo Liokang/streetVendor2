@@ -1,0 +1,220 @@
+<%- include('boilerplate/header') %>
+
+  <style>
+
+    .containers {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group button[type="submit"] {
+      padding: 10px 20px;
+      border: none;
+      background-color: #4caf50;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .form-group button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .cart {
+      margin-top: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cart-item label {
+      font-weight: bold;
+    }
+
+    .cart-item input[type="text"] {
+      flex: 1;
+      margin-left: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark navbarColor" style="background:black;">
+
+    <div class="container">
+    <a class="navbar-brand" href="#">ATUL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+      </ul>
+      <% if(isloggedIn){ %>
+        <form class="d-flex ms-auto order-5">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+         </form>
+       <%} else{ %>
+         <form class="d-flex ms-auto order-5">
+           <ul class="navbar-nav mr-auto">
+             <li class="nav-item">
+               <a class="nav-link" href="/login">Login</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="/signup">Sign Up</a>
+             </li>
+           </ul>
+          </form>
+         <%  }%>
+    </div>
+  </div>
+  </nav>
+
+
+  <div class="containers">
+
+    <h2>Vendor Page</h2>
+    <form id="item-form" action="/vendorstore" method="post" >
+      <div class="form-group">
+        <label for="item-name">Item Name:</label>
+        <input type="text" id="item-name" class="form-control" name="name1"  placeholder="Enter item name"  required>
+      </div>
+      <div class="form-group">
+        <label for="item-price">Item Price:</label>
+        <input type="text" id="item-price" class="form-control" name="name2" placeholder="Enter item price"  required>
+      </div>
+      <div class="form-group">
+        <label for="item-price">Image:</label>
+        <input type="text" id="item-price" class="form-control" name="name3" placeholder="ENter the url of image"  required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+
+
+  <div class="cart">
+    <h3>Cart</h3>
+
+    <div id="cart-items">
+      <% for (let i = 0; i < list.cart.length; i++) { %>
+      <ul>
+        <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="<%= list.cart[i].image %>" class="card-img" alt="Image">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= list.cart[i].product %></h5>
+                <p class="card-text">Price:<%= list.cart[i].quantity %></p>
+
+                <form action="/deletevendorcart/<%= list.cart[i]._id%>" method="post">
+                   <button type="submit" class="submit-button btn btn-danger">Delete</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </ul>
+    <% } %>
+  </div>
+  </div>
+  </div>
+
+
+
+
+
+
+<script>
+
+
+  document.getElementById("item-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var itemName = document.getElementById("item-name").value;
+    var itemPrice = document.getElementById("item-price").value;
+
+
+
+    var cartItems = document.getElementById("cart-items");
+
+    var cartItem = document.createElement("div");
+    cartItem.classList.add("cart-item");
+
+    var itemLabel = document.createElement("label");
+    itemLabel.textContent = itemName;
+    cartItem.appendChild(itemLabel);
+
+    var itemInput = document.createElement("input");
+    itemInput.type = "text";
+    itemInput.classList.add("form-control");
+    itemInput.value = itemPrice;
+    itemInput.readOnly = true;
+    cartItem.appendChild(itemInput);
+    cartItems.appendChild(cartItem);
+
+
+    document.getElementById("item-name").value = "";
+    document.getElementById("item-price").value = "";
+
+  });
+
+
+});
+
+</script>
+<%- include('boilerplate/footer') %>

@@ -1,0 +1,71 @@
+<%- include('../boilerplate/header') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbarColor">
+
+  <div class="container">
+  <a class="navbar-brand" href="#">ATUL</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/secretuser">User Portal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/secretvendor">Vendor Portal</a>
+      </li>
+    </ul>
+    <% if(isloggedIn){ %>
+      <form class="d-flex ms-auto order-5">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+       </form>
+     <%} else{ %>
+       <form class="d-flex ms-auto order-5">
+         <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+             <a class="nav-link" href="/login">Login</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="/signup">Sign Up</a>
+           </li>
+         </ul>
+        </form>
+       <%  }%>
+  </div>
+</div>
+</nav>
+
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+
+
+<div  style="width: 300px; background-color: #f1f1f1; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); class="card" style="width: 18rem;">
+    <img src="https://etimg.etb2bimg.com/thumb/msid-77179683,width-1200,height-900,resizemode-4/.jpg" class="card-img-top" alt="Card Image">
+    <div class="card-body">
+      <h5 class="card-title">Login As User</h5>
+      <p class="card-text">Order Any Food And Vegetable At Your Doorstep</p>
+      <a href="/loginuser" class="btn btn-primary" target="_blank">CLICK ME</a>
+    </div>
+  </div>
+
+  <div style="width: 300px; background-color: #f1f1f1; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 10px;" class="card" style="width: 18rem;">
+      <img src="https://thumbs.dreamstime.com/b/vendedor-ambulante-novo-que-vende-frutas-e-legumes-frescas-mercado-local-dos-fazendeiros-projeto-liso-do-vetor-117201372.jpg" class="card-img-top" alt="Card Image">
+      <div class="card-body">
+        <h5 class="card-title">Login as Vendor</h5>
+        <p class="card-text">Sell your Vegetable And Food to Maximum People And increase your day to day profit</p>
+        <a href="/loginvendor" class="btn btn-danger" target="_blank">CLICK ME</a>
+      </div>
+    </div>
+
+</div>
+
+
+<%- include('../boilerplate/footer') %>

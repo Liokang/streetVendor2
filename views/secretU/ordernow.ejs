@@ -1,0 +1,77 @@
+<%- include('../boilerplate/header') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbarColor">
+
+  <div class="container">
+  <a class="navbar-brand" href="#">ATUL</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+    <% if(isloggedIn){ %>
+      <form class="d-flex ms-auto order-5">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+       </form>
+     <%} else{ %>
+       <form class="d-flex ms-auto order-5">
+         <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+             <a class="nav-link" href="/login">Login</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="/signup">Sign Up</a>
+           </li>
+         </ul>
+        </form>
+       <%  }%>
+  </div>
+</div>
+</nav>
+
+<% if(isloggedIn){ %>
+
+ <% for (let i = 0; i < listOfVendors.length; i++) { %>
+
+  <div class="container" style="display: flex;
+  flex-direction: column; align-items: center;" >
+
+      <div class="col-md-4">
+        <div class="card" style="border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;">
+          <img src="<%-listOfVendors[i].image %>" width="100px" height="200px" class="card-img-top" alt="Image 1">
+          <div class="card-body">
+            <h5 class="card-title"><%-listOfVendors[i].name %></h5>
+            <p class="card-text"><%-listOfVendors[i].phoneNumber %></p>
+            <a href="/ordernow/vendor/<%-listOfVendors[i]._id %>" class="btn btn-primary">Button</a>
+          </div>
+        </div>
+      </div>
+
+  </div>
+ <% } %>
+
+
+
+<%} else {%>
+  <div class="container">
+    <a href="/login"><h1 class="mt-5">Redirecting to Login Page...</h1></a>
+  </div>
+  <% } %>
+
+  <%- include('../boilerplate/footer') %>
