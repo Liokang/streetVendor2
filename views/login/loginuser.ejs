@@ -1,64 +1,79 @@
 <%- include('../boilerplate/header') %>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbarColor">
-
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container">
-  <a class="navbar-brand" href="#">ATUL</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/secretuser">User Portal</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/secretvendor">Vendor Portal</a>
-      </li>
-    </ul>
-    <% if(isloggedIn){ %>
-      <form class="d-flex ms-auto order-5">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        </ul>
-       </form>
-     <%} else{ %>
-       <form class="d-flex ms-auto order-5">
-         <ul class="navbar-nav mr-auto">
-           <li class="nav-item">
-             <a class="nav-link" href="/login">Login</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="/signup">Sign Up</a>
-           </li>
-         </ul>
-        </form>
-       <%  }%>
+    <a class="navbar-brand fw-bold fs-4" href="#">ATUL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" 
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/secretuser">User Portal</a></li>
+        <li class="nav-item"><a class="nav-link" href="/secretvendor">Vendor Portal</a></li>
+      </ul>
+      <% if (isloggedIn) { %>
+        <a class="btn btn-outline-light rounded-pill px-3" href="/logout">Logout</a>
+      <% } else { %>
+        <a class="btn btn-outline-light rounded-pill px-3 me-2" href="/login">Login</a>
+        <a class="btn btn-warning rounded-pill px-3" href="/signup">Sign Up</a>
+      <% } %>
+    </div>
   </div>
-</div>
 </nav>
 
-
-<div class="container">
-
-<form  action="/loginuser"  method="POST">
-  <div  class="form-group" >
-
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email">
+<!-- Login Form Section -->
+<section class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="max-width: 400px; width: 100%;">
+    <div class="card-body">
+      <h3 class="text-center fw-bold mb-4">Login</h3>
+      <form action="/loginuser" method="POST">
+        <div class="form-group mb-3">
+          <label for="exampleInputEmail1" class="fw-semibold">Email address</label>
+          <input type="email" 
+                 class="form-control form-control-lg rounded-pill px-3" 
+                 id="exampleInputEmail1" 
+                 name="email" 
+                 placeholder="Enter your email">
+        </div>
+        <div class="form-group mb-4">
+          <label for="exampleInputPassword1" class="fw-semibold">Password</label>
+          <input type="password" 
+                 class="form-control form-control-lg rounded-pill px-3" 
+                 id="exampleInputPassword1" 
+                 name="password" 
+                 placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn btn-dark w-100 rounded-pill py-2">Login</button>
+      </form>
+      <p class="text-center mt-3 text-muted">
+        Don’t have an account? <a href="/signup" class="fw-semibold text-dark">Sign Up</a>
+      </p>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
+</section>
 
 <%- include('../boilerplate/footer') %>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .card {
+    background: #ffffff;
+  }
+
+  .form-control:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.15);
+  }
+
+  .btn-dark:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: 0.2s ease-in-out;
+  }
+</style>

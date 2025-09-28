@@ -1,70 +1,78 @@
 <%- include('../boilerplate/header') %>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbarColor">
-
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container">
-  <a class="navbar-brand" href="#">ATUL</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-    </ul>
-    <% if(isloggedIn){ %>
-      <form class="d-flex ms-auto order-5">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        </ul>
-       </form>
-     <%} else{ %>
-       <form class="d-flex ms-auto order-5">
-         <ul class="navbar-nav mr-auto">
-           <li class="nav-item">
-             <a class="nav-link" href="/login">Login</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="/signup">Sign Up</a>
-           </li>
-         </ul>
-        </form>
-       <%  }%>
-  </div>
-</div>
-</nav>
+    <a class="navbar-brand fw-bold fs-4" href="#">ATUL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" 
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-
-
-<div  style="width: 300px; background-color: #f1f1f1; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); class="card" style="width: 18rem;">
-    <img src="https://etimg.etb2bimg.com/thumb/msid-77179683,width-1200,height-900,resizemode-4/.jpg" class="card-img-top" alt="Card Image">
-    <div class="card-body">
-      <h5 class="card-title">Sign Up As User</h5>
-      <p class="card-text">Order Any Food And Vegetable At Your Doorstep</p>
-      <a href="/signupuser" class="btn btn-primary" target="_blank">CLICK ME</a>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/secretuser">User Portal</a></li>
+        <li class="nav-item"><a class="nav-link" href="/secretvendor">Vendor Portal</a></li>
+      </ul>
+      <% if (isloggedIn) { %>
+        <a class="btn btn-outline-light rounded-pill px-3" href="/logout">Logout</a>
+      <% } else { %>
+        <a class="btn btn-outline-light rounded-pill px-3 me-2" href="/login">Login</a>
+        <a class="btn btn-warning rounded-pill px-3" href="/signup">Sign Up</a>
+      <% } %>
     </div>
   </div>
+</nav>
 
-  <div style="width: 300px; background-color: #f1f1f1; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 10px;" class="card" style="width: 18rem;">
-      <img src="https://thumbs.dreamstime.com/b/vendedor-ambulante-novo-que-vende-frutas-e-legumes-frescas-mercado-local-dos-fazendeiros-projeto-liso-do-vetor-117201372.jpg" class="card-img-top" alt="Card Image">
-      <div class="card-body">
-        <h5 class="card-title">Sign up as Vendor</h5>
-        <p class="card-text">Sell your Vegetable And Food to Maximum People And increase your day to day profit</p>
-        <a href="/signupvendor" class="btn btn-danger" target="_blank">CLICK ME</a>
+<!-- Signup Choice -->
+<section class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="d-flex flex-wrap justify-content-center gap-4">
+
+    <!-- User Signup Card -->
+    <div class="card shadow-lg border-0 rounded-4" style="width: 20rem;">
+      <img src="https://etimg.etb2bimg.com/thumb/msid-77179683,width-1200,height-900,resizemode-4/.jpg" 
+           class="card-img-top rounded-top-4" alt="User Signup">
+      <div class="card-body text-center">
+        <h5 class="card-title fw-bold">Sign Up as User</h5>
+        <p class="card-text text-muted">Order food & vegetables at your doorstep easily.</p>
+        <a href="/signupuser" class="btn btn-dark rounded-pill px-4 py-2">Click Me</a>
       </div>
     </div>
 
-</div>
+    <!-- Vendor Signup Card -->
+    <div class="card shadow-lg border-0 rounded-4" style="width: 20rem;">
+      <img src="https://thumbs.dreamstime.com/b/vendedor-ambulante-novo-que-vende-frutas-e-legumes-frescas-mercado-local-dos-fazendeiros-projeto-liso-do-vetor-117201372.jpg" 
+           class="card-img-top rounded-top-4" alt="Vendor Signup">
+      <div class="card-body text-center">
+        <h5 class="card-title fw-bold">Sign Up as Vendor</h5>
+        <p class="card-text text-muted">Sell fresh food & vegetables and grow your business.</p>
+        <a href="/signupvendor" class="btn btn-warning rounded-pill px-4 py-2">Click Me</a>
+      </div>
+    </div>
 
+  </div>
+</section>
 
 <%- include('../boilerplate/footer') %>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-dark:hover, .btn-warning:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: 0.2s ease-in-out;
+  }
+</style>

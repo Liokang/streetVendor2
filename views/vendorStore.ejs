@@ -1,220 +1,109 @@
 <%- include('boilerplate/header') %>
 
-  <style>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f2f2f5;">
 
-    .containers {
-      max-width: 500px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .form-group input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .form-group button[type="submit"] {
-      padding: 10px 20px;
-      border: none;
-      background-color: #4caf50;
-      color: #fff;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .form-group button[type="submit"]:hover {
-      background-color: #45a049;
-    }
-
-    .cart {
-      margin-top: 20px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-    }
-
-    .cart-item label {
-      font-weight: bold;
-    }
-
-    .cart-item input[type="text"] {
-      flex: 1;
-      margin-left: 10px;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-  </style>
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark navbarColor" style="background:black;">
-
-    <div class="container">
-    <a class="navbar-brand" href="#">ATUL</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">ATUL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
       </ul>
       <% if(isloggedIn){ %>
-        <form class="d-flex ms-auto order-5">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
-          </ul>
-         </form>
-       <%} else{ %>
-         <form class="d-flex ms-auto order-5">
-           <ul class="navbar-nav mr-auto">
-             <li class="nav-item">
-               <a class="nav-link" href="/login">Login</a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link" href="/signup">Sign Up</a>
-             </li>
-           </ul>
-          </form>
-         <%  }%>
+        <a class="btn btn-outline-light btn-sm ms-auto" href="/logout">Logout</a>
+      <% } else { %>
+        <div class="d-flex ms-auto gap-2">
+          <a class="btn btn-outline-light btn-sm" href="/login">Login</a>
+          <a class="btn btn-primary btn-sm" href="/signup">Sign Up</a>
+        </div>
+      <% } %>
     </div>
   </div>
-  </nav>
+</nav>
 
+<section class="py-5">
+  <div class="container" style="max-width: 600px;">
+    <div class="card shadow p-4 mb-5 bg-white rounded-5" style="border: none;">
+      <h3 class="text-center fw-semibold mb-4" style="letter-spacing: 0.5px;">Vendor Page</h3>
+      <form id="item-form" action="/vendorstore" method="post">
+        <div class="mb-3">
+          <label for="item-name" class="form-label fw-semibold">Item Name</label>
+          <input type="text" id="item-name" name="name1" class="form-control rounded-pill" placeholder="Enter item name" required>
+        </div>
+        <div class="mb-3">
+          <label for="item-price" class="form-label fw-semibold">Item Price</label>
+          <input type="text" id="item-price" name="name2" class="form-control rounded-pill" placeholder="Enter item price" required>
+        </div>
+        <div class="mb-3">
+          <label for="item-image" class="form-label fw-semibold">Image URL</label>
+          <input type="text" id="item-image" name="name3" class="form-control rounded-pill" placeholder="Enter the image URL" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Add to Cart</button>
+      </form>
+    </div>
 
-  <div class="containers">
-
-    <h2>Vendor Page</h2>
-    <form id="item-form" action="/vendorstore" method="post" >
-      <div class="form-group">
-        <label for="item-name">Item Name:</label>
-        <input type="text" id="item-name" class="form-control" name="name1"  placeholder="Enter item name"  required>
-      </div>
-      <div class="form-group">
-        <label for="item-price">Item Price:</label>
-        <input type="text" id="item-price" class="form-control" name="name2" placeholder="Enter item price"  required>
-      </div>
-      <div class="form-group">
-        <label for="item-price">Image:</label>
-        <input type="text" id="item-price" class="form-control" name="name3" placeholder="ENter the url of image"  required>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Add to Cart</button>
-    </form>
-
-
-  <div class="cart">
-    <h3>Cart</h3>
-
-    <div id="cart-items">
-      <% for (let i = 0; i < list.cart.length; i++) { %>
-      <ul>
-        <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <img src="<%= list.cart[i].image %>" class="card-img" alt="Image">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= list.cart[i].product %></h5>
-                <p class="card-text">Price:<%= list.cart[i].quantity %></p>
-
-                <form action="/deletevendorcart/<%= list.cart[i]._id%>" method="post">
-                   <button type="submit" class="submit-button btn btn-danger">Delete</button>
-                </form>
-
-              </div>
-            </div>
+    <h4 class="mb-3 fw-semibold">Cart Items</h4>
+    <% for (let i = 0; i < list.cart.length; i++) { %>
+      <div class="card shadow-sm mb-3 rounded-5 p-3" style="border: none; background-color: #fff;">
+        <div class="d-flex align-items-center gap-3">
+          <img src="<%= list.cart[i].image %>" alt="Item Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px;">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1"><%= list.cart[i].product %></h5>
+            <p class="mb-1">Price: ₹<%= list.cart[i].quantity %></p>
           </div>
+          <form action="/deletevendorcart/<%= list.cart[i]._id %>" method="post">
+            <button type="submit" class="btn btn-danger rounded-pill px-3 py-1">Delete</button>
+          </form>
         </div>
       </div>
-    </div>
-  </div>
-    </ul>
     <% } %>
   </div>
-  </div>
-  </div>
+</section>
 
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f2f2f5;
+  }
+  .card {
+    border-radius: 20px !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  }
+  .btn-primary {
+    background: linear-gradient(135deg,#0a84ff,#5ac8fa);
+    border: none;
+    font-weight: 600;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg,#5ac8fa,#0a84ff);
+    transform: translateY(-1px);
+  }
+  .btn-danger {
+    background-color: #ff3b30;
+    border: none;
+  }
+  .btn-danger:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  input.form-control {
+    transition: 0.2s ease-in-out;
+    border: 1px solid #d1d1d6;
+    padding: 10px 15px;
+  }
+  input.form-control:focus {
+    border-color: #0a84ff;
+    box-shadow: 0 0 0 0.2rem rgba(10,132,255,0.2);
+  }
+  h3, h4 {
+    color: #1c1c1e;
+  }
+</style>
 
-
-
-
-
-<script>
-
-
-  document.getElementById("item-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var itemName = document.getElementById("item-name").value;
-    var itemPrice = document.getElementById("item-price").value;
-
-
-
-    var cartItems = document.getElementById("cart-items");
-
-    var cartItem = document.createElement("div");
-    cartItem.classList.add("cart-item");
-
-    var itemLabel = document.createElement("label");
-    itemLabel.textContent = itemName;
-    cartItem.appendChild(itemLabel);
-
-    var itemInput = document.createElement("input");
-    itemInput.type = "text";
-    itemInput.classList.add("form-control");
-    itemInput.value = itemPrice;
-    itemInput.readOnly = true;
-    cartItem.appendChild(itemInput);
-    cartItems.appendChild(cartItem);
-
-
-    document.getElementById("item-name").value = "";
-    document.getElementById("item-price").value = "";
-
-  });
-
-
-});
-
-</script>
 <%- include('boilerplate/footer') %>

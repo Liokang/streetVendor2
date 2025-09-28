@@ -1,71 +1,79 @@
 <%- include('../boilerplate/header') %>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbarColor">
-
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container">
-  <a class="navbar-brand" href="#">ATUL</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-    </ul>
-    <% if(isloggedIn){ %>
-      <form class="d-flex ms-auto order-5">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        </ul>
-       </form>
-     <%} else{ %>
-       <form class="d-flex ms-auto order-5">
-         <ul class="navbar-nav mr-auto">
-           <li class="nav-item">
-             <a class="nav-link" href="/login">Login</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="/signup">Sign Up</a>
-           </li>
-         </ul>
-        </form>
-       <%  }%>
+    <a class="navbar-brand fw-bold fs-4" href="#">ATUL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+      </ul>
+      <% if (isloggedIn) { %>
+        <a class="btn btn-outline-light rounded-pill px-3" href="/logout">Logout</a>
+      <% } else { %>
+        <a class="btn btn-outline-light rounded-pill px-3 me-2" href="/login">Login</a>
+        <a class="btn btn-warning rounded-pill px-3" href="/signup">Sign Up</a>
+      <% } %>
+    </div>
   </div>
-</div>
 </nav>
 
+<!-- Vendor Signup Form -->
+<section class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="max-width: 450px; width: 100%;">
+    <div class="card-body">
+      <h3 class="text-center fw-bold mb-4">Vendor Sign Up</h3>
+      <form action="/signupvendor" method="POST">
+        <div class="mb-3">
+          <label for="nameInput" class="fw-semibold">Name</label>
+          <input type="text" class="form-control form-control-lg rounded-pill px-3" id="nameInput" name="name" placeholder="Enter Name" required>
+        </div>
 
-<div class="container">
+        <div class="mb-3">
+          <label for="phoneInput" class="fw-semibold">Phone Number</label>
+          <input type="text" class="form-control form-control-lg rounded-pill px-3" id="phoneInput" name="phoneno" placeholder="Enter Phone Number" required>
+        </div>
 
-<form action="/signupvendor" method="POST">
-  <div class="form-group">
-    <label for="fornameinput">Name</label>
-    <input type="text" class="form-control" id="fornameinput" aria-describedby="textHelp" Name="name" placeholder="Enter Name">
-  </div>
-  <div class="form-group">
-    <label for="fornamephone">Phone Number</label>
-    <input type="text" class="form-control" id="fornamephone" aria-describedby="phonehelp" Name="phoneno" placeholder="Enter Phone Number">
-  </div>
-  <div class="form-group">
-    <label for="fornameimage">Image</label>
-    <input type="text" class="form-control" id="fornameinput" aria-describedby="textHelp" Name="image" placeholder="Paste Image URL">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" Name="password" placeholder="Password">
-  </div>
+        <div class="mb-3">
+          <label for="imageInput" class="fw-semibold">Image URL</label>
+          <input type="text" class="form-control form-control-lg rounded-pill px-3" id="imageInput" name="image" placeholder="Paste Image URL" required>
+        </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
+        <div class="mb-4">
+          <label for="passwordInput" class="fw-semibold">Password</label>
+          <input type="password" class="form-control form-control-lg rounded-pill px-3" id="passwordInput" name="password" placeholder="Enter Password" required>
+        </div>
+
+        <button type="submit" class="btn btn-dark w-100 rounded-pill py-2">Sign Up</button>
+      </form>
+      <p class="text-center mt-3 text-muted">
+        Already have an account? <a href="/login" class="fw-semibold text-dark">Login</a>
+      </p>
+    </div>
+  </div>
+</section>
 
 <%- include('../boilerplate/footer') %>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .form-control:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.15);
+  }
+
+  .btn-dark:hover, .btn-warning:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: 0.2s ease-in-out;
+  }
+</style>

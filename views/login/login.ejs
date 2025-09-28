@@ -1,71 +1,98 @@
 <%- include('../boilerplate/header') %>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbarColor">
-
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
   <div class="container">
-  <a class="navbar-brand" href="#">ATUL</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/secretuser">User Portal</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/secretvendor">Vendor Portal</a>
-      </li>
-    </ul>
-    <% if(isloggedIn){ %>
-      <form class="d-flex ms-auto order-5">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        </ul>
-       </form>
-     <%} else{ %>
-       <form class="d-flex ms-auto order-5">
-         <ul class="navbar-nav mr-auto">
-           <li class="nav-item">
-             <a class="nav-link" href="/login">Login</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="/signup">Sign Up</a>
-           </li>
-         </ul>
-        </form>
-       <%  }%>
+    <a class="navbar-brand fw-bold fs-4 text-dark" href="#">🍏 ATUL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" 
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link fw-semibold" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold" href="/secretuser">User Portal</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold" href="/secretvendor">Vendor Portal</a></li>
+      </ul>
+
+      <% if (isloggedIn) { %>
+        <a class="btn btn-dark rounded-pill px-4" href="/logout">Logout</a>
+      <% } else { %>
+        <a class="btn btn-outline-dark rounded-pill px-4 me-2" href="/login">Login</a>
+        <a class="btn btn-dark rounded-pill px-4" href="/signup">Sign Up</a>
+      <% } %>
+    </div>
   </div>
-</div>
 </nav>
 
+<!-- Main Section -->
+<section class="d-flex align-items-center justify-content-center min-vh-100 bg-light" style="padding-top: 80px;">
+  <div class="container">
+    <div class="row justify-content-center g-5">
 
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+      <!-- User Card -->
+      <div class="col-md-5">
+        <div class="card border-0 shadow-lg rounded-5 overflow-hidden hover-card">
+          <img src="https://etimg.etb2bimg.com/thumb/msid-77179683,width-1200,height-900,resizemode-4/.jpg" 
+               class="card-img-top" alt="User Login">
+          <div class="card-body text-center p-4">
+            <h4 class="fw-bold mb-3">Login as User</h4>
+            <p class="text-muted">Order fresh food & vegetables delivered straight to your doorstep.</p>
+            <a href="/loginuser" class="btn btn-dark rounded-pill px-4 mt-3" target="_blank">Continue</a>
+          </div>
+        </div>
+      </div>
 
+      <!-- Vendor Card -->
+      <div class="col-md-5">
+        <div class="card border-0 shadow-lg rounded-5 overflow-hidden hover-card">
+          <img src="https://thumbs.dreamstime.com/b/vendedor-ambulante-novo-que-vende-frutas-e-legumes-frescas-mercado-local-dos-fazendeiros-projeto-liso-do-vetor-117201372.jpg" 
+               class="card-img-top" alt="Vendor Login">
+          <div class="card-body text-center p-4">
+            <h4 class="fw-bold mb-3">Login as Vendor</h4>
+            <p class="text-muted">Sell your products to more people and grow your daily profits.</p>
+            <a href="/loginvendor" class="btn btn-dark rounded-pill px-4 mt-3" target="_blank">Continue</a>
+          </div>
+        </div>
+      </div>
 
-<div  style="width: 300px; background-color: #f1f1f1; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); class="card" style="width: 18rem;">
-    <img src="https://etimg.etb2bimg.com/thumb/msid-77179683,width-1200,height-900,resizemode-4/.jpg" class="card-img-top" alt="Card Image">
-    <div class="card-body">
-      <h5 class="card-title">Login As User</h5>
-      <p class="card-text">Order Any Food And Vegetable At Your Doorstep</p>
-      <a href="/loginuser" class="btn btn-primary" target="_blank">CLICK ME</a>
     </div>
   </div>
-
-  <div style="width: 300px; background-color: #f1f1f1; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 10px;" class="card" style="width: 18rem;">
-      <img src="https://thumbs.dreamstime.com/b/vendedor-ambulante-novo-que-vende-frutas-e-legumes-frescas-mercado-local-dos-fazendeiros-projeto-liso-do-vetor-117201372.jpg" class="card-img-top" alt="Card Image">
-      <div class="card-body">
-        <h5 class="card-title">Login as Vendor</h5>
-        <p class="card-text">Sell your Vegetable And Food to Maximum People And increase your day to day profit</p>
-        <a href="/loginvendor" class="btn btn-danger" target="_blank">CLICK ME</a>
-      </div>
-    </div>
-
-</div>
-
+</section>
 
 <%- include('../boilerplate/footer') %>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  }
+
+  .navbar {
+    backdrop-filter: blur(10px);
+  }
+
+  .hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-img-top {
+    object-fit: cover;
+    height: 220px;
+  }
+
+  .btn {
+    transition: all 0.2s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
+</style>

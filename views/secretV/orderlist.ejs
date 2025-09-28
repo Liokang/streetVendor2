@@ -1,37 +1,68 @@
 <%- include('../boilerplate/header') %>
-<body style="font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 20px;">
-    <h1 style="text-align: center;">Order List</h1>
-  <div style="max-width: 800px; margin: 0 auto;">
-<% for (let i = 0; i < tempVendorDetails.length; i++) { %>
-    <div style="background-color: #fff; padding: 20px; margin-bottom: 20px;">
-      <h2 style="font-size: 24px; margin-bottom: 10px;">Order <%=i+1 %></h2>
-      <p style="margin-bottom: 5px;">Date: 2023-06-30</p>
-      <p style="margin-bottom: 5px;">Customer Name:<%=tempVendorDetails[i].name%></p>
-      <p style="margin-bottom: 5px;">Phone Number:<%=tempVendorDetails[i].phoneNumber%></p>
-      <p style="margin-bottom: 5px;">Address:<%=tempVendorDetails[i].address%></p>
-      <ul style="list-style: none; padding: 0;">
-<% for (let j = 0; j < tempVendorDetails[i].products.length; j++) { %>
-        <li style="margin-bottom: 10px;">
-          <span style="font-weight: bold;">Name: <%= tempVendorDetails[i].products[j].product %></span>
-          <span style="margin-left: 10px;">Quantity: <%= tempVendorDetails[i].products[j].quantity %></span>
-          <span style="margin-left: 10px;">Price: <%= tempVendorDetails[i].products[j].price %></span>
-        </li>
-<%  } %>
- <!-- <button type="submit" class="submit-button btn btn-primary">Track Your Order</button> -->
- <form class="" action="/deleteorder/<%=tempVendorDetails[i]._id%>" method="post">
-   <button type="submit" class="submit-button btn btn-danger">Order Completed</button>
- </form>
 
-<button type="button" class="btn btn-primary "name="button"><a href="/trackyourorder/<%=tempVendorDetails[i]._id%>">clickhere</a></button>
-
-
-      </ul>
-    </div>
- <% } %>
-
-    <div style="background-color: #fff; padding: 20px; margin-bottom: 20px;">
-      <!-- Add more order details here -->
-    </div>
-
+<!-- Page Title -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h1 class="fw-bold">Order List</h1>
   </div>
+</section>
+
+<!-- Orders Container -->
+<section class="py-4">
+  <div class="container">
+    <% for (let i = 0; i < tempVendorDetails.length; i++) { %>
+      <div class="card shadow-sm mb-4 p-4">
+        <h4 class="fw-bold mb-2">Order <%= i + 1 %></h4>
+        <p class="mb-1"><strong>Date:</strong> 2023-06-30</p>
+        <p class="mb-1"><strong>Customer Name:</strong> <%= tempVendorDetails[i].name %></p>
+        <p class="mb-1"><strong>Phone Number:</strong> <%= tempVendorDetails[i].phoneNumber %></p>
+        <p class="mb-3"><strong>Address:</strong> <%= tempVendorDetails[i].address %></p>
+
+        <ul class="list-unstyled mb-3">
+          <% for (let j = 0; j < tempVendorDetails[i].products.length; j++) { %>
+            <li class="mb-2">
+              <span class="fw-semibold">Name:</span> <%= tempVendorDetails[i].products[j].product %>
+              <span class="ms-3"><strong>Quantity:</strong> <%= tempVendorDetails[i].products[j].quantity %></span>
+              <span class="ms-3"><strong>Price:</strong> ₹<%= tempVendorDetails[i].products[j].price %></span>
+            </li>
+          <% } %>
+        </ul>
+
+        <div class="d-flex gap-2">
+          <form action="/deleteorder/<%= tempVendorDetails[i]._id %>" method="POST">
+            <button type="submit" class="btn btn-danger rounded-pill px-4">Order Completed</button>
+          </form>
+          <a href="/trackyourorder/<%= tempVendorDetails[i]._id %>" class="btn btn-primary rounded-pill px-4">Track Your Order</a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</section>
+
 <%- include('../boilerplate/footer') %>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f2f2f2;
+  }
+
+  .card {
+    background-color: #fff;
+    border-radius: 12px;
+  }
+
+  .btn-primary, .btn-danger {
+    transition: 0.2s ease-in-out;
+  }
+
+  .btn-primary:hover, .btn-danger:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  a.btn {
+    color: #fff;
+    text-decoration: none;
+  }
+</style>
